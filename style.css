@@ -1,0 +1,395 @@
+                    * {
+                        font-family: "Cascadia Mono", sans-serif;
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                        scroll-behavior: smooth;
+                    }
+                    
+                    body {
+                        background-color: #000;
+                        color: #fff;
+                    }
+                    
+                    #content {
+                        background-image: url(img5/pg/services_bg.jpg);
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        padding: 40px 20px;
+                    }
+                    
+                    #navbar {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 10px 20px;
+                    }
+                    
+                    #navbar a {
+                        color: #fff;
+                        text-decoration: none;
+                        margin: 0px 30px;
+                        font-weight: bold;
+                    }
+                    /* From Uiverse.io by naelawadallah */
+                    
+                    .search-header {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        text-align: center;
+                    }
+                    
+                    .search-header__input {
+                        font-family: inherit;
+                        font-size: 16px;
+                        background-color: #0a0a0a;
+                        border: solid 0.5px #525252;
+                        color: #646464;
+                        padding: 0.7rem 1rem;
+                        border-radius: 25px;
+                        transition: all ease-in-out 0.5s;
+                        margin-right: -2rem;
+                        opacity: 1;
+                        text-align: center;
+                        max-width: 190px;
+                        padding: 10px 20px;
+                    }
+                    
+                    .search-header__input:hover,
+                    .search-header__input:focus {
+                        box-shadow: 0 0 1em #00000013;
+                    }
+                    
+                    .search-header__input:focus {
+                        outline: none;
+                        background-color: #0a0a0aad;
+                    }
+                    
+                    .search-header__input::-webkit-input-placeholder {
+                        font-weight: 100;
+                        color: #3a3a3a;
+                    }
+                    
+                    .search-header__input:focus+.search-header__button {
+                        background-color: transparent;
+                    }
+                    
+                    .search-header__button {
+                        border: none;
+                        background-color: transparent;
+                        margin-top: 0.1em;
+                    }
+                    
+                    .search-header__button:hover {
+                        cursor: pointer;
+                    }
+                    
+                    .search-header__icon {
+                        height: 1.3em;
+                        width: 1.3em;
+                        fill: #3a3a3a;
+                    }
+                    
+                    #navbar #nav-left a {
+                        font-size: 28px;
+                        color: red;
+                    }
+                    
+                    #center {
+                        padding: 100px 20px;
+                        text-align: center;
+                    }
+                    
+                    #center h2 {
+                        font-size: 36px;
+                        color: red;
+                    }
+                    
+                    #center h1 {
+                        font-size: 24px;
+                        margin-top: 10px;
+                    }
+                    
+                    #center h1 span {
+                        color: red;
+                        font-weight: bold;
+                    }
+                    
+                    #div-p p {
+                        display: inline-block;
+                        background-color: #fff;
+                        color: #000;
+                        font-size: 12px;
+                        font-weight: bold;
+                        margin: 5px;
+                        padding: 6px 10px;
+                        border-radius: 20px;
+                    }
+                    
+                    #center button {
+                        margin-top: 20px;
+                        padding: 10px 25px;
+                        background: none;
+                        border: 2px solid #e5e216;
+                        color: #fff;
+                        border-radius: 30px;
+                        cursor: pointer;
+                        font-weight: bold;
+                    }
+                    
+                    #center button:hover {
+                        background-color: #e5e216;
+                        color: #000;
+                    }
+                    
+                    #main-poster,
+                    #series-section {
+                        background-image: url(img5/pg/services_bg.jpg);
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        padding: 40px 20px;
+                    }
+                    
+                    #title {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        margin-bottom: 20px;
+                    }
+                    
+                    #title-left h1 {
+                        color: red;
+                        font-size: 32px;
+                    }
+                    
+                    #title-left p {
+                        font-size: 16px;
+                        color: #ccc;
+                    }
+                    
+                    #card {
+                        width: 280px;
+                        height: auto;
+                        background-color: #111;
+                        margin: 15px;
+                        border-radius: 15px;
+                        overflow: hidden;
+                        display: inline-block;
+                        vertical-align: top;
+                    }
+                    
+                    #poster img {
+                        width: 100%;
+                        height: 300px;
+                        object-fit: cover;
+                    }
+                    
+                    #data-list {
+                        padding: 15px;
+                    }
+                    
+                    #data-list h1 {
+                        font-size: 18px;
+                        color: red;
+                        margin-bottom: 5px;
+                    }
+                    
+                    #data-list p {
+                        font-size: 14px;
+                        color: #ccc;
+                    }
+                    
+                    #div-star {
+                        margin-top: 10px;
+                    }
+                    
+                    #div-star input {
+                        display: none;
+                    }
+                    
+                    #div-star label {
+                        cursor: pointer;
+                        color: #fff;
+                        font-size: 18px;
+                        margin-left: 20px;
+                    }
+                    
+                    #div-star label::before {
+                        content: '★';
+                    }
+                    
+                    #div-star input:checked+label {
+                        color: gold;
+                    }
+                    
+                    .button-star {
+                        display: inline-block;
+                        margin-top: 10px;
+                        padding: 8px 15px;
+                        border: 2px solid #e5e216;
+                        border-radius: 30px;
+                        background: none;
+                        color: white;
+                        text-decoration: none;
+                        font-weight: bold;
+                        transition: 0.3s;
+                        font-size: 14px;
+                        margin-left: 70px;
+                    }
+                    
+                    .button-star:hover {
+                        background: #e5e216;
+                        color: #000;
+                    }
+                    
+                    .footer {
+                        background: #000;
+                        text-align: center;
+                        padding: 20px;
+                        margin-top: 30px;
+                    }
+                    
+                    .footer p {
+                        color: #ccc;
+                        font-size: 14px;
+                    }
+                    
+                    #cards-movies {
+                        display: flex;
+                        overflow-x: auto;
+                        gap: 20px;
+                        scroll-snap-type: x mandatory;
+                        padding: 10px 0;
+                    }
+                    
+                    #cards-movies::-webkit-scrollbar {
+                        height: 8px;
+                    }
+                    
+                    #cards-movies::-webkit-scrollbar-thumb {
+                        background: #888;
+                        border-radius: 10px;
+                    }
+                    
+                    #cards-movies::-webkit-scrollbar-track {
+                        background: transparent;
+                    }
+                    
+                    #card {
+                        flex: 0 0 auto;
+                        /* تمنع تمدده */
+                        scroll-snap-align: start;
+                    }
+                    
+                    .cards-wrapper {
+                        position: relative;
+                        margin: 40px 0;
+                        padding: 10px 40px;
+                        overflow: hidden;
+                    }
+                    
+                    .cards-container {
+                        display: flex;
+                        gap: 20px;
+                        overflow-x: auto;
+                        scroll-behavior: smooth;
+                        padding-bottom: 10px;
+                        scrollbar-width: none;
+                        /* Firefox */
+                    }
+                    
+                    .cards-container::-webkit-scrollbar {
+                        display: none;
+                        /* Chrome */
+                    }
+                    
+                    .scroll-button {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        font-size: 26px;
+                        background-color: rgba(0, 0, 0, 0.6);
+                        color: #fff;
+                        border: none;
+                        cursor: pointer;
+                        z-index: 10;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        transition: background-color 0.3s ease;
+                    }
+                    
+                    .scroll-button:hover {
+                        background-color: rgba(255, 255, 255, 0.2);
+                    }
+                    
+                    .scroll-button.left {
+                        left: 10px;
+                    }
+                    
+                    .scroll-button.right {
+                        right: 10px;
+                    }
+                    
+                    #card {
+                        background-color: #111;
+                        border-radius: 15px;
+                        overflow: hidden;
+                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+                        background-color: #111;
+                        border-radius: 15px;
+                        transition: transform 0.3s ease;
+                        width: 260px;
+                        height: 460px;
+                    }
+                    
+                    #card:hover {
+                        transform: scale(1.09);
+                        z-index: 10;
+                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+                        border-radius: 15px;
+                    }
+                    
+                    #poster img {
+                        width: 100%;
+                        object-fit: cover;
+                        border-bottom: 2px solid red;
+                        height: 250px;
+                    }
+                    
+                    #data-list {
+                        padding: 15px;
+                        height: 140px;
+                    }
+                    
+                    #data-list h1 {
+                        font-size: 18px;
+                        color: #e50914;
+                        margin-bottom: 8px;
+                    }
+                    
+                    #data-list p {
+                        font-size: 14px;
+                        color: #ccc;
+                        margin-bottom: 8px;
+                    }
+                    
+                    .button-star {
+                        display: inline-block;
+                        margin-top: 10px;
+                        padding: 8px 20px;
+                        border: 2px solid #e5e216;
+                        border-radius: 30px;
+                        background: none;
+                        color: white;
+                        font-weight: bold;
+                        text-decoration: none;
+                        font-size: 14px;
+                        transition: 0.10s;
+                    }
+                    
+                    .button-star:hover {
+                        background-color: #e5e216;
+                        color: #000;
+                    }
