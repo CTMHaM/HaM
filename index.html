@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HaM سينما</title>
     <link href="https://fonts.googleapis.com/css2?family=Cascadia+Mono&display=swap" rel="stylesheet" />
+<!-- ✅ إعلان Monetag Popunder -->
+<script type="text/javascript" src="https://propu.sh/pfe/current/tag.min.js?z=2979852" data-cfasync="false" async></script>
 
     <style>
         /* ✅ الخط العام *
@@ -570,12 +572,6 @@
     renderCards(movies, "#cards-movies");
     renderCards(series, "#cards-series");
     startAutoScroll();
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js')
-    .then(reg => console.log('SW registered', reg))
-    .catch(err => console.error('SW registration failed', err));
-}
-
 
  </script>
 
