@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Cascadia+Mono&display=swap" rel="stylesheet" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- عنوان يظهر في محركات البحث -->
+    <title>مشاهدة أفلام ومسلسلات مجانًا | HaM سينما</title>
+    <!-- وصف يظهر تحت العنوان في البحث -->
+    <meta name="description" content="شاهد أحدث الأفلام والمسلسلات مجانًا بجودة عالية على موقع HaM سينما. بدون إعلانات مزعجة وبتصميم عربي أنيق.">
+    <!-- كلمات مفتاحية تساعد في البحث -->
+    <meta name="keywords" content="أفلام, مسلسلات, مشاهدة أفلام, HaM سينما, أفلام عربية, مسلسلات أجنبية, أفلام أنمي, مشاهدة مجانية, سينما, تحميل أفلام">
+    <!-- صاحب الموقع (اختياري) -->
+    <meta name="author" content="HaM Cinema Team">
+    <!-- اللغة (مفيدة لمحركات البحث) -->
+    <meta name="language" content="ar">
+    <!-- محركات البحث تسمح بالأرشفة -->
+    <meta name="robots" content="index, follow">
+    <!-- رابط favicon (كما أضفنا في الخطوة 6) -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- روابط مهمة لفهرسة الصفحة (إن وجدت) -->
+    <link rel="canonical" href="https://hamcinema.is-a.dev/" />
+    <button id="theme-toggle" class="theme-toggle">🌙 الوضع الليلي</button>
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#101010">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+
+
+
+
+    <style>
+        /* ✅ الخط العام */
+        
+        body {
+            font-family: 'Cascadia Mono', monospace;
+            margin: 0;
+            background-color: #0b0c10;
+            color: #fff;
+            direction: ltr;
+        }
+        /* ✅ الهيدر والنافبار */
+        
+        #navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0b0c10;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        #navbar a {
+            color: #66fcf1;
+            text-decoration: none;
+            margin: 0px 30px;
+            font-weight: bold;
+        }
+        
+        #nav-left a {
+            color: #66fcf1;
+            font-size: 22px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        /* ✅ شريط البحث */
+        
+        .search-header {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-header__input {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+            outline: none;
+            width: 200px;
+        }
+        
+        .search-header__button {
+            background-color: #66fcf1;
+            border: none;
+            padding: 9px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .search-header__icon {
+            width: 18px;
+            height: 18px;
+        }
+        /* ✅ القسم الرئيسي */
+        
+        #center {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #0b0c10;
+        }
+        
+        #center h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        #center span {
+            color: #66fcf1;
+        }
+        
+        #div-p {
+            margin: 20px 0;
+        }
+        
+        #div-p p {
+            display: inline-block;
+            background-color: #1f2833;
+            padding: 6px 12px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        /* ✅ الأزرار */
+        
+        button {
+            cursor: pointer;
+            background-color: #66fcf1;
+            border: none;
+            color: #0b0c10;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background-color: #45a29e;
+        }
+        /* ✅ العناوين */
+        
+        #title {
+            padding: 20px;
+        }
+        
+        #title-left h1 {
+            font-size: 24px;
+            color: #66fcf1;
+        }
+        
+        #title-left p {
+            color: #c5c6c7;
+        }
+        /* ✅ كروت الأفلام والمسلسلات */
+        
+        .cards-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            margin: 0 20px 40px;
+        }
+        
+        .cards-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 20px;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+        
+        #card {
+            flex: 0 0 auto;
+            border-radius: 8px;
+            width: 150px;
+            overflow: hidden;
+            padding: 10px;
+            background-color: #111;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            height: 50;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transform-style: preserve-3d;
+            perspective: 800px;
+        }
+        
+        #card:hover {
+            transform: scale(1.09);
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            transform: rotateY(4deg) rotateX(3deg) scale(1.03);
+            box-shadow: 0 20px 50px rgba(100, 100, 255, 0.2);
+            /* بنفسجي مزرق */
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 25px #39FF14, 0 0 50px #39FF14;
+            /* أزرق نيوني */
+        }
+        
+        .card::before {
+            background: rgba(57, 255, 20, 0.1);
+            /* أخضر نيوني شفاف */
+        }
+        
+        #poster img {
+            width: 100%;
+            border-radius: 6px;
+            object-fit: cover;
+            border-bottom: 2px solid red;
+        }
+        
+        #data-list {
+            margin-top: 10px;
+        }
+        
+        #data-list h1 {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        
+        #data-list p {
+            font-size: 13px;
+            color: #c5c6c7;
+        }
+        /* ✅ التقييم بالنجوم */
+        
+        #div-star {
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        #div-star input[type="radio"] {
+            display: none;
+        }
+        
+        #div-star label {
+            color: #ccc;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        #div-star input:checked~label {
+            color: #ff0;
+        }
+        
+        .button-star {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #e50914;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        
+        .button-star:hover {
+            background-color: #b00610;
+        }
+        /* ✅ أزرار التمرير */
+        
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(102, 252, 241, 0.7);
+            color: #000;
+            border-radius: 50%;
+            padding: 8px 12px;
+            z-index: 10;
+        }
+        
+        .scroll-button.left {
+            left: 0;
+        }
+        
+        .scroll-button.right {
+            right: 0;
+        }
+        /* ✅ الفوتر */
+        
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #1f2833;
+            color: #c5c6c7;
+            font-size: 14px;
+        }
+        
+        .offers-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        
+        .offers-container .card {
+            flex: 0 0 auto;
+            border-radius: 8px;
+            width: 300PX;
+            padding: 10px;
+            background-color: #111;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 20px;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+            height: 165PX;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transform-style: preserve-3d;
+            perspective: 800px;
+        }
+        
+        .offers-container .card:hover {
+            transform: scale(1.09);
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            transform: rotateY(4deg) rotateX(3deg) scale(1.03);
+            box-shadow: 0 20px 50px rgba(100, 100, 255, 0.2);
+            /* بنفسجي مزرق */
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 25px #39FF14, 0 0 50px #39FF14;
+            /* أزرق نيوني */
+        }
+        
+        .offers-container .card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-bottom: 2px solid red;
+        }
+        
+        .offers-container .data-list {
+            margin-left: 8px;
+        }
+        
+        .offers-container .data-list h1 {
+            font-size: 10px;
+            margin: 5px 0;
+        }
+        
+        .offers-container .data-list p {
+            font-size: 10px;
+        }
+        
+        .offers-container .card-content {
+            padding: 10px;
+        }
+        
+        .load-more-button {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #e50914;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-left: 620px;
+        }
+        
+        .watch-now {
+            display: inline-block;
+            margin-left: 13px;
+            background-color: #e50914;
+            color: white;
+            padding: 4px 2px;
+            border-radius: 4px;
+            text-decoration: none;
+            width: 44PX;
+            height: 37PX;
+        }
+        
+        .watch-now:hover {
+            background-color: #b00610;
+        }
+        /* ✅ تحسين للعرض على الشاشات الصغيرة */
+        
+        @media (max-width: 768px) {
+            .card {
+                width: 150px;
+                /* أو حسب تصميمك */
+            }
+            .cards-container {
+                gap: 8px;
+                padding: 5px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .card {
+                width: 120px;
+            }
+        }
+        /* الوضع الليلي */
+        
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        
+        .dark-mode .card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #eee;
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        body.dark-mode .theme-toggle {
+            background-color: #444;
+            color: #fff;
+        }
+    </style>
+    <meta name="monetag" content="b0ddbd6219e97ff8d3f2ff7dc2b61671">
+
+</head>
+
+<body>
+    <section id="content">
+        <main id="navbar">
+            <div id="nav-left"><a href="#">سينما HaM</a></div>
+            <div id="nav-center">
+                <a href="">الرئيسية</a>
+                <a href="#main-poster">الافلام</a>
+                <a href="#series-section">المسلسلات</a>
+            </div>
+            <div class="search-header">
+                <input placeholder="Search" class="search-header__input" type="text" />
+                <button class="search-header__button">
+          <svg fill="none" viewBox="0 0 18 18" height="18" width="18" class="search-header__icon">
+            <path fill="#3A3A3A"
+              d="M7.132 0C3.197 0 0 3.124 0 6.97c0 3.844 3.197 6.969 7.132 6.969 1.557 0 2.995-.49 4.169-1.32L16.82 18 18 16.847l-5.454-5.342a6.846 6.846 0 0 0 1.718-4.536C14.264 3.124 11.067 0 7.132 0zm0 .82c3.48 0 6.293 2.748 6.293 6.15 0 3.4-2.813 6.149-6.293 6.149S.839 10.37.839 6.969C.839 3.568 3.651.82 7.132.82z">
+            </path>
+          </svg>
+        </button>
+            </div>
+        </main>
+
+    </section>
+
+    <section id="main-poster">
+        <div id="title">
+            <div id="title-left">
+                <p>استمتع بمشاهدة</p>
+                <h1>أفضل الأفلام</h1>
+            </div>
+        </div>
+        <div class="cards-wrapper">
+            <button class="scroll-button left movies-left">&#8249;</button>
+            <div id="cards-movies" class="cards-container"></div>
+            <button class="scroll-button right movies-right">&#8250;</button>
+        </div>
+    </section>
+
+    <section id="series-section">
+        <div id="title">
+            <div id="title-left">
+                <p>مسلسلات حصرية</p>
+                <h1>افضل المسلسللات</h1>
+            </div>
+        </div>
+        <div class="cards-wrapper">
+            <button class="scroll-button left series-left">&#8249;</button>
+            <div id="cards-series" class="cards-container"></div>
+            <button class="scroll-button right series-right">&#8250;</button>
+        </div>
+    </section>
+
+    <!-- أضف بعد سكشن المسلسلات مباشرةً -->
+    <h2>شاهدالان</h2>
+    <div id="cards-offers" class="offers-container"></div>
+    <button id="load-more-offers" class="load-more-button">المزيد من العروض</button>
+    <!-- Facebook / Open Graph -->
+    <meta property="og:title" content="داني الشبح - الحلقة 1">
+    <meta property="og:description" content="في هذه الحلقة يكتشف داني قواه الخارقة لأول مرة.">
+    <meta property="og:image" content="https://hamcinema.is-a.dev/images/danny1.webp">
+    <meta property="og:url" content="https://hamcinema.is-a.dev/details1.html">
+    <meta property="og:type" content="video.episode">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="داني الشبح - الحلقة 1">
+    <meta name="twitter:description" content="في هذه الحلقة يكتشف داني قواه الخارقة لأول مرة.">
+    <meta name="twitter:image" content="https://hamcinema.is-a.dev/images/danny1.webp">
+
+    <section class="footer">
+        <p>جميع الحقوق محفوظة &copy; 2025 HaM سينما</p>
+    </section>
+
+    <script>
+        const movies = [{
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany02.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany010.jpg",
+                link: "show1/watch1.html"
+            },
+
+            {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany09.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany08.jpg",
+                link: "show1/watch1.html"
+            },
+
+            {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany07.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany06.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany05.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany04.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany03.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany02.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany03.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany04.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany05.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany09.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany010.jpg",
+                link: "show1/watch1.html"
+            },
+            // كرر حسب الحاجة...
+        ];
+
+        const series = [
+
+            {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany01.jpg",
+                link: "show1/watch1.html"
+            },
+            // كرر حسب الحاجة...
+            {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany02.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany03.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany04.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany05.jpg",
+                link: "show1/watch1.html"
+            },
+
+            {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany06.jpg",
+                link: "show1/watch1.html"
+            },
+
+            {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany07.jpg",
+                link: "show1/watch1.html"
+            },
+
+            {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany08.jpg",
+                link: "show1/watch1.html"
+            },
+
+            {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany09.jpg",
+                link: "show1/watch1.html"
+            },
+
+
+            {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany010.jpg",
+                link: "show1/watch1.html"
+            },
+
+
+            {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany02.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany03.jpg",
+                link: "show1/watch1.html"
+            },
+
+            {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany07.jpg",
+                link: "show1/watch1.html"
+            },
+
+
+            {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany05.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany04.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany09.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany06.jpg",
+                link: "show1/watch1.html"
+            }, {
+                episode: 1,
+                title: "دانى الشبح ",
+                description: " الموسم الاول ",
+                image: "img5/dany/dany08.jpg",
+                link: "show1/watch1.html"
+            },
+
+
+        ];
+        // بيانات العروض
+        const offers = [{
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany01.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany02.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany03.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany04.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany05.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany06.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany07.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany08.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany09.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany010.jpg ",
+                link: "#"
+            },
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany01.jpg ",
+                link: "#"
+            },
+
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany02.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany03.jpg ",
+                link: "#"
+            },
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany04.jpg ",
+                link: "#"
+            },
+
+
+
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany05.jpg ",
+                link: "#"
+            },
+
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany06.jpg ",
+                link: "#"
+            },
+
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany07.jpg ",
+                link: "#"
+            },
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany08.jpg ",
+                link: "#"
+            },
+
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany09.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany010.jpg ",
+                link: "#"
+            },
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany09.jpg ",
+                link: "#"
+            },
+
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany08.jpg ",
+                link: "#"
+            },
+
+
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany07.jpg ",
+                link: "#"
+            },
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany06.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany05.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany04.jpg ",
+                link: "#"
+            },
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany03.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany02.jpg ",
+                link: "#"
+            }, {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany01.jpg ",
+                link: "#"
+            },
+
+            {
+                title: "عرض 1",
+                description: "تفاصيل العرض 1",
+                image: "img5/dany/dany05.jpg ",
+                link: "#"
+            },
+
+        ];
+
+        const pageSize = 8;
+        let offersIndex = 0;
+
+        function renderOffers() {
+            const container = document.getElementById("cards-offers");
+            const next = offers.slice(offersIndex, offersIndex + pageSize);
+            next.forEach(item => {
+                const card = document.createElement("div");
+                card.className = "card";
+                container.appendChild(card);
+                card.innerHTML = `
+  <img src="${item.image}" alt="${item.title}">
+  <div class="card-content">
+    <h3>${item.title}</h3>
+    <p>${item.description}</p>
+    <a href="${item.link}" class="watch-now"> شاهد الآن</a>
+  </div>
+`;
+
+            });
+            offersIndex += pageSize;
+            if (offersIndex >= offers.length) {
+                document.getElementById("load-more-offers").style.display = "none";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderOffers();
+            document.getElementById("load-more-offers").addEventListener("click", renderOffers);
+        });
+
+        function getRatingText(star) {
+            return ["سئ جدا جدا", "سئ جدا", "سئ", "ممتاز", "ممتاز جدا"][star - 1] || "";
+        }
+
+        function renderCards(list, containerId) {
+            const container = document.querySelector(containerId);
+            container.innerHTML = "";
+            const fullList = [...list];
+            fullList.forEach((item, index) => {
+                        const card = document.createElement("div");
+                        card.id = "card";
+                        card.innerHTML = `
+          <div id="poster"><img src="${item.image}" alt="${item.title}"></div>
+          <div id="data-list">
+            <h1>${item.title}</h1>
+            <p>${item.description}</p>
+            <div id="div-star">
+              ${[1,2,3,4,5].map(i => `
+                <input type="radio" id="star${i}-${containerId}-${index}" name="rating-${containerId}-${index}"
+                  ${localStorage.getItem('rating-${containerId}-${index}') == i ? 'checked' : ''}>
+                <label for="star${i}-${containerId}-${index}" onclick="
+                  localStorage.setItem('rating-${containerId}-${index}', ${i});
+                  document.getElementById('text-${containerId}-${index}').innerText = '${getRatingText(i)}';
+                "></label>
+              `).join('')}
+              <p id="text-${containerId}-${index}">
+                ${getRatingText(localStorage.getItem(`rating-${containerId}-${index}`) || 0)}
+              </p>
+              <a href="${item.link}" class="button-star" target="_blank">شاهد الآن</a>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterCards(query) {
+      const q = query.trim().toLowerCase();
+      if (q === "") {
+        renderCards(movies, "#cards-movies");
+        renderCards(series, "#cards-series");
+      } else {
+        const filteredMovies = movies.filter(movie => movie.title.toLowerCase().includes(q));
+        const filteredSeries = series.filter(serie => serie.title.toLowerCase().includes(q));
+        renderCards(filteredMovies, "#cards-movies");
+        renderCards(filteredSeries, "#cards-series");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const input = document.querySelector(".search-header__input");
+      const button = document.querySelector(".search-header__button");
+      button.addEventListener("click", () => filterCards(input.value));
+      input.addEventListener("keydown", e => { if (e.key === "Enter") filterCards(input.value); });
+      filterCards("");
+    });
+
+    document.querySelector('.scroll-button.movies-left').onclick = () => {
+      document.querySelector('#cards-movies').scrollBy({ left: -800, behavior: 'smooth' });
+      pauseAutoScroll();
+    };
+    document.querySelector('.scroll-button.movies-right').onclick = () => {
+      document.querySelector('#cards-movies').scrollBy({ left: 800, behavior: 'smooth' });
+      pauseAutoScroll();
+    };
+    document.querySelector('.scroll-button.series-left').onclick = () => {
+      document.querySelector('#cards-series').scrollBy({ left: -800, behavior: 'smooth' });
+      pauseAutoScroll();
+    };
+    document.querySelector('.scroll-button.series-right').onclick = () => {
+      document.querySelector('#cards-series').scrollBy({ left: 800, behavior: 'smooth' });
+      pauseAutoScroll();
+    };
+
+    let scrollAmount = 800;
+    let autoScrollInterval;
+    let pauseTimeout;
+
+    function autoScroll(containerId) {
+      const container = document.querySelector(containerId);
+      const maxScroll = container.scrollWidth / 2;
+      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      if (container.scrollLeft >= maxScroll) {
+        container.scrollLeft = 0;
+      }
+    }
+
+    function startAutoScroll() {
+      autoScrollInterval = setInterval(() => {
+        autoScroll('#cards-movies');
+        autoScroll('#cards-series');
+      }, 5000);
+    }
+
+    function pauseAutoScroll() {
+      clearInterval(autoScrollInterval);
+      clearTimeout(pauseTimeout);
+      pauseTimeout = setTimeout(startAutoScroll, 20000);
+    }
+
+    renderCards(movies, "#cards-movies");
+    renderCards(series, "#cards-series");
+    startAutoScroll();    // عند تحميل الصفحة: تحقق إذا كان الوضع الليلي مفعّل مسبقًا
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        document.getElementById("theme-toggle").innerText = "☀️ الوضع النهاري";
+    }
+
+    // عند الضغط على الزر: تبديل الثيم وتحديث localStorage
+    document.getElementById("theme-toggle").addEventListener("click", function() {
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+            localStorage.setItem("theme", "dark");
+            this.innerText = "☀️ الوضع النهاري";
+        } else {
+            localStorage.setItem("theme", "light");
+            this.innerText = "🌙 الوضع الليلي";
+        }
+    });  
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log("✅ تم تسجيل Service Worker"))
+      .catch(err => console.error("❌ فشل التسجيل:", err));
+  }
+    </script>
+</body>
+
+
+</html>
